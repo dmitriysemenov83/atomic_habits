@@ -29,12 +29,3 @@ def mailing_telegram():
                     # Обновление поля date в зависимости от значения поля period
                     habit.date += datetime.timedelta(days=habit.period)
                     habit.save()
-
-            # if time_up.hour == time_begin_habit.hour and time_up.minute == time_begin_habit.minute:
-            #     user_id = habit.user.chat_id
-            #     message = habit_massage(habit)
-            #     send_tg(user_id, message)
-            #
-            #     # Обновление поля date в зависимости от значения поля period
-            #     habit.date += datetime.timedelta(days=habit.period)
-            #     habit.save()

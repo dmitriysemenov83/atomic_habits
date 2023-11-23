@@ -36,16 +36,7 @@ class HabitSerializer(serializers.ModelSerializer):
 
         period = data.get('period')
 
-        if period == 'WEEKLY':
-            time = data.get('time')
-            user = data.get('user')
-
-            habits = Habit.objects.filter(user=user, period=period)
-
-            for habit in habits:
-                if habit.id != data.get('id'):
-                    if abs(habit.time - time) < timedelta(days=7):
-                        raise serializers.ValidationError(
-                            "Нельзя выполнять привычку реже, чем 1 раз в 7 дней.")
+        if period > 7:
+            raise serializers.ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней')
 
         return data
