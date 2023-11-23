@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -144,7 +145,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',  #IsAuthenticated / AllowAny
+        'rest_framework.permissions.AllowAny',  #IsAuthenticated / AllowAny
     ]
 }
 
@@ -161,3 +162,17 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://read-and-write.example.com",
 ]
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'habits.tasks.mailing_telegram',   # Путь к задаче
+        'schedule': timedelta(seconds=60),  # Расписание выполнения задачи (например, каждые 1 минуты)
+    }
+}
+
+
+TG_TOKEN = os.getenv('TG_TOKEN')
+USER_TG_ID = os.getenv('USER_TG_ID')

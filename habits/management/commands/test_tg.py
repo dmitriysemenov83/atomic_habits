@@ -1,0 +1,13 @@
+from django.core.management import BaseCommand
+
+from config.settings import USER_TG_ID
+from habits.services import send_tg
+
+user_id = USER_TG_ID
+message = 'Привет это твой бот, как ты братик?'
+
+
+class Command(BaseCommand):
+
+    def handle(self, *args, **options):
+        send_tg(user_id, message)

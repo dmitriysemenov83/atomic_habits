@@ -1,22 +1,24 @@
 from django.db import models
-
+from django.utils import timezone
 from users.models import User, NULLABLE
 
 
 class Habit(models.Model):
-    PERIOD = (
-        ('DAILY', 'каждый день'),
-        ('WEEKLY', 'раз в неделю')
-    )
+    # PERIOD = (
+    #     ('DAILY', 'каждый день'),
+    #     ('WEEKLY', 'раз в неделю')
+    # )
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', **NULLABLE)
     place = models.CharField(max_length=255, verbose_name='Место')
-    time = models.TimeField(verbose_name='Время', **NULLABLE)
+    time = models.TimeField(verbose_name='Время')
+    date = models.DateField(verbose_name='Дата')
     action = models.CharField(max_length=255, verbose_name='Действие')
-    is_pleasant = models.BooleanField(verbose_name='Признак приятной привычки')
+    is_pleasant = models.BooleanField(default=False, verbose_name='Признак приятной привычки')
     related_habit = models.ForeignKey('self', on_delete=models.CASCADE, **NULLABLE, verbose_name='Связанная привычка')
-    period = models.CharField(max_length=10, choices=PERIOD, default='DAILY', verbose_name='Периодичность')
+    period = models.IntegerField(default='1', verbose_name='Периодичность', **NULLABLE)
+    # period = models.CharField(max_length=10, choices=PERIOD, default='DAILY', verbose_name='Периодичность')
     reward = models.CharField(max_length=255, verbose_name='Вознаграждение', **NULLABLE)
-    time_to_complete = models.PositiveIntegerField(verbose_name='Время на выполнение в секундах', default=2)
+    time_to_complete = models.PositiveIntegerField(verbose_name='Время на выполнение в секундах', default=120)
     is_public = models.BooleanField(default=False, verbose_name='Признак публичности')
 
     class Meta:

@@ -12,6 +12,7 @@ class User(AbstractUser):
     phone = models.CharField(max_length=35, verbose_name='Номер телефона', **NULLABLE)
     country = models.CharField(max_length=100, verbose_name='Страна', **NULLABLE)
     avatar = models.ImageField(upload_to='users/', verbose_name='Аватар', **NULLABLE)
+    chat_id = models.CharField(max_length=50, verbose_name='Chat ID')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
