@@ -19,14 +19,6 @@ class HabitListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
     pagination_class = HabitsPaginator
 
-    # def get_queryset(self):
-    #     # Возвращаем только привычки пользователя и публичные привычки
-    #     if self.request.user.is_authenticated:  # Проверяем, аутентифицирован ли пользователь
-    #         return Habit.objects.filter(Q(user=self.request.user) | Q(is_public=True))
-    #     else:
-    #         return Habit.objects.filter(
-    #             is_public=True)  # Если пользователь не аутентифицирован, возвращаем только публичные привычки
-
 
 class PublicHabitList(generics.ListAPIView):
     queryset = Habit.objects.filter(is_public=True)
