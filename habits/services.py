@@ -13,7 +13,7 @@ def send_tg(user_id, message):
         'chat_id': user_id,
         'text': message
     }
-    response = requests.post(url, data=data)  # Отправка сообщения
+    requests.post(url, data=data)
 
 
 def habit_massage(obj):

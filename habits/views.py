@@ -1,10 +1,9 @@
-from django.db.models import Q
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from habits.models import Habit
 from habits.paginators import HabitsPaginator
-from habits.permissions import IsOwnerOrReadOnly, CanViewPublicHabits
+from habits.permissions import IsOwnerOrReadOnly
 from habits.serializers import HabitSerializer
 
 
