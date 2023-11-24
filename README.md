@@ -15,5 +15,5 @@
 - Вводим данные в env.sample, переименовать на .env
 - Создаем базу данных 
 - Выполнить миграции
-    python manage.py makemigrations
-    python manage.py migrate
+    - python manage.py makemigrations
+    - python manage.py migrate
