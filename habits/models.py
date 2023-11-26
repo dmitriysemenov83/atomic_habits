@@ -1,7 +1,7 @@
 from django.db import models
 
 from config import settings
-from users.models import User, NULLABLE
+from users.models import NULLABLE
 
 
 class Habit(models.Model):
