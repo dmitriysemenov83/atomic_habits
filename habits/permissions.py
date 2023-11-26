@@ -11,3 +11,4 @@ class CanViewPublicHabits(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Разрешить просмотр только владельцу привычки или если привычка публичная
         return obj.user == request.user or obj.is_public
+
